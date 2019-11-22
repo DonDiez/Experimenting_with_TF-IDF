@@ -2,6 +2,7 @@ import string
 import math
 from os import listdir
 from os.path import isfile, join
+import operator
 mypath = "files"
 
 
@@ -66,12 +67,10 @@ def init():
 q = input(str("Query? : "))
 listOfDict,files = init()
 w,res = tdidf(q,listOfDict)
+max_index, max_value = max(enumerate(res), key=operator.itemgetter(1))
 
-plass = 0
-#print(w)
-for r in range(len(res)):
-    if res[r]>plass:
-        plass = r
-print("Dokument med navn \""+files[plass]+"\" er mest relevant for Q=\""+q+"\"")
-
+if sum(res)!=0:
+    print("Document \""+files[max_index]+"\" is the most relevant with \t Q=\""+q+"\"")
+else:
+    print("No match")
        
