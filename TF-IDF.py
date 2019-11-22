@@ -3,6 +3,7 @@ import math
 from os import listdir
 from os.path import isfile, join
 import operator
+from tabulate import tabulate
 mypath = "files"
 
 
@@ -32,10 +33,9 @@ def count(file):
                     dict[wordClean] += 1
                 else:
                     dict[wordClean] = 1
-    dict["xXxXx"]=nr
     return dict
 
-def tdidf(q,docs):
+def tdidf(q,docs,files):
     weights = []
     for x in range(len(docs)):
         row = []
@@ -43,34 +43,33 @@ def tdidf(q,docs):
             if (docs[x].__contains__(word)):
                 row.append((log10(1+docs[x][word])) * (IDF(word)))
             else:
-                
                 row.append(0)
         weights.append(row)
-    print("q = "+q)
     res=[]
     for rows in weights:
-        summas = 1
-        for nr in rows:
-            summas=summas*nr
-        res.append(summas)
+        res.append(sum(rows))
     return weights, res
 
 def init():
     files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     listOfDict=[]
-    print(files)
     for l in range(len(files)):
         listOfDict.append(count(files[l]))
     return listOfDict,files
 
-
-q = input(str("Query? : "))
-listOfDict,files = init()
-w,res = tdidf(q,listOfDict)
-max_index, max_value = max(enumerate(res), key=operator.itemgetter(1))
-
-if sum(res)!=0:
-    print("Document \""+files[max_index]+"\" is the most relevant with \t Q=\""+q+"\"")
-else:
-    print("No match")
-       
+q = None
+while q!="exit":
+    
+    q = input(str("\nQuery? : "))
+    listOfDict,files = init()
+    w,res = tdidf(q,listOfDict,files)
+    max_index, max_value = max(enumerate(res), key=operator.itemgetter(1))
+    if sum(res)!=0:
+        prettyTab = []
+        for textNR in range(len(files)):
+            prettyTab.append([files[textNR],res[textNR]])
+        print(tabulate(prettyTab, headers=['Name', 'Result']))
+        print("Document \""+files[max_index]+"\" is the most relevant")
+    else:
+        print("No match")
+        
