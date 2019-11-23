@@ -64,7 +64,7 @@ while q!="exit":
     listOfDict,files = init()
     w,res = tdidf(q,listOfDict,files)
     max_index, max_value = max(enumerate(res), key=operator.itemgetter(1))
-    if sum(res)!=0:
+    if sum(res)!=0 :
         prettyTab = []
         for textNR in range(len(files)):
             prettyTab.append([files[textNR],res[textNR]])
