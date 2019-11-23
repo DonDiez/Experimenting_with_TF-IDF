@@ -36,6 +36,11 @@ sun.txt      1.80236
 Document "sun.txt" is the most relevant
 ```
 The results will be presented as a table with the total sum of the weights. The last sentence will be the name of the most relevant file.
+
+
+This is the maic spell; 
+TF-IDF
+
 ![Figure 1-1](https://wikimedia.org/api/rest_v1/media/math/render/svg/cb8cdf7f351b63973cee045cc98c9efcde04203a?raw=true "Figure 1-1")
  
  
