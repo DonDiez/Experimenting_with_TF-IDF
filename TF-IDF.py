@@ -68,6 +68,7 @@ while q!="exit":
             f = open("files/"+subject+".txt", "w")
             f.write(dataWiki)
             f.close()
+            print("Added file "+subject)
         except:
             print("No match in wikipedia")
         print("\n----------End Adding page to files-----------")
