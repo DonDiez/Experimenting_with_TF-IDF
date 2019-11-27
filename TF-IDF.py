@@ -4,6 +4,7 @@ from os import listdir
 from os.path import isfile, join
 import operator
 from tabulate import tabulate
+import wikipedia 
 mypath = "files"
 
 
@@ -15,7 +16,6 @@ def IDF(word):
     for dictonary in listOfDict:
         if dictonary.__contains__(word):
             antallDoc+=1
-
     return (log10( len(files) / (antallDoc+1) + 1 ))
 
 def count(file):
@@ -23,19 +23,17 @@ def count(file):
         content = f.readlines()
     content = [x.strip() for x in content] 
     dict = {}
-    nr = 0
     for line in content:
         for word in line.split():
             wordClean = ''.join(ch for ch in word if ch not in (string.punctuation+"1234567890-+_\n\t")).lower()
             if (len(wordClean)>=1):
-                nr += 1
                 if wordClean in dict:
                     dict[wordClean] += 1
                 else:
                     dict[wordClean] = 1
     return dict
 
-def tdidf(q,docs,files):
+def tdidf(q,docs):
     weights = []
     for x in range(len(docs)):
         row = []
@@ -60,16 +58,28 @@ def init():
 q = None
 while q!="exit":
     
+
     q = input(str("\nQuery? : "))
-    listOfDict,files = init()
-    w,res = tdidf(q,listOfDict,files)
-    max_index, max_value = max(enumerate(res), key=operator.itemgetter(1))
-    if sum(res)!=0 :
-        prettyTab = []
-        for textNR in range(len(files)):
-            prettyTab.append([files[textNR],res[textNR]])
-        print(tabulate(prettyTab, headers=['Name', 'Result']))
-        print("Document \""+files[max_index]+"\" is the most relevant")
+    if q=="data+":
+        try:
+            print("\n-------------Adding page to files-----------")
+            subject = str(input("Subject = ")).lower()
+            f = open("files/"+subject+".txt", "w")
+            f.write(wikipedia.page(subject).content)
+            f.close()
+        except:
+            print("No match in wikipedia")
+        print("\n----------End Adding page to files-----------")
     else:
-        print("No match")
-        
+        listOfDict,files = init()
+        w,res = tdidf(q,listOfDict)
+        max_index, max_value = max(enumerate(res), key=operator.itemgetter(1))
+        if sum(res)!=0 :
+            prettyTab = []
+            for textNR in range(len(files)):
+                prettyTab.append([files[textNR],res[textNR]])
+            print(tabulate(prettyTab, headers=['Name', 'Result']))
+            print("Document \""+files[max_index]+"\" is the most relevant")
+        else:
+            print("No match")
+            
