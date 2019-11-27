@@ -64,8 +64,9 @@ while q!="exit":
         try:
             print("\n-------------Adding page to files-----------")
             subject = str(input("Subject = ")).lower()
+            dataWiki = wikipedia.page(subject).content
             f = open("files/"+subject+".txt", "w")
-            f.write(wikipedia.page(subject).content)
+            f.write(dataWiki)
             f.close()
         except:
             print("No match in wikipedia")
