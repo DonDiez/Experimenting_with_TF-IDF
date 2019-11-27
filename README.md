@@ -38,6 +38,10 @@ Document "sun.txt" is the most relevant
 The results will be presented as a table with the total sum of the weights. The last sentence will be the name of the most relevant file.
 
 
+## Possible to add more data
+Use the command "data+" to add content to files from wikipedia :)
+
+
 ---
 This is the magic spell, TF-IDF: 
 
