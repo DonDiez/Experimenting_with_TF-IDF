@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{{ url_for("static", filename="style/main.css")}}'>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Wizard Search</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    
+    <form>
+        <label for="search">Search:</label>
+        <input type="text" id="searchQuery" name="searchQuery">
+        <input type="submit" value="Search">
+    </form>
+    {% block body %}{% endblock %}
+    <table>
+        {% for file in files %}
+        <th>
+            {{ file }}
+        </th>
+        {% endfor %}
+    </table>
+</body>
+</html>
