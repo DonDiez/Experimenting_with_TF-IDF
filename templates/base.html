@@ -6,16 +6,28 @@
     <link rel="stylesheet" href='{{ url_for("static", filename="style/main.css")}}'>
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <title>Wizard Search</title>
-    {% block head %}{% endblock %}
 </head>
 <body>
+ 
+    <div class="grid-container">
+        <div class="grid-item"></div>
+        <div class="grid-item">{% block head %}{% endblock %}</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">
+            <form method="post">
+                <label for="search">Search:</label>
+                <input type="text" name="searchQuery">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="grid-item"></div>
+    </div> 
     <p>{{ r }}</p>
-    <form method="post">
-        <label for="search">Search:</label>
-        <input type="text" name="searchQuery">
-        <input type="submit" value="Search">
-    </form>
-    {% block body %}{% endblock %}
+    
     <table>
         {% for file in results %}
             {% if file[1]!=0 %}
@@ -25,5 +37,7 @@
             {% endif %}
         {% endfor %}
     </table>
+      {% block body %}{% endblock %}
+      
 </body>
 </html>
