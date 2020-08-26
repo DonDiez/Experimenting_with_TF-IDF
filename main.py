@@ -1,19 +1,27 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 import os
 from os import listdir
 from os.path import isfile, join
+from tdidf import search
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
 def index():
-    return render_template("index.html")
+    if request.method == "POST":
+        resultList = (request.form["searchQuery"])
+        print(search(resultList))
+        return render_template("index.html", results=search(resultList))
+    else:
+        return render_template("index.html")
 
 @app.route('/files')
 def method_name():
     path = "files/"
     onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
     print(onlyfiles)
+    # q = input(str("\nQuery? : "))
+    listen = []
     return render_template("index.html", files=onlyfiles)
 
 # Removes the cache of the CSS on the flask development server

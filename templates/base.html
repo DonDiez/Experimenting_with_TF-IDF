@@ -9,18 +9,20 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    
-    <form>
+    <p>{{ r }}</p>
+    <form method="post">
         <label for="search">Search:</label>
-        <input type="text" id="searchQuery" name="searchQuery">
+        <input type="text" name="searchQuery">
         <input type="submit" value="Search">
     </form>
     {% block body %}{% endblock %}
     <table>
-        {% for file in files %}
-        <th>
-            {{ file }}
-        </th>
+        {% for file in results %}
+            {% if file[1]!=0 %}
+            <div>{{ file[0] }}  {{ file[1] }}</div>
+            {% else %}
+                {{ pass }}
+            {% endif %}
         {% endfor %}
     </table>
 </body>
