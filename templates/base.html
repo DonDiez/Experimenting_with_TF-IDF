@@ -14,9 +14,6 @@
         <div class="grid-item">{% block head %}{% endblock %}</div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
         <div class="grid-item">
             <form method="post">
                 <label for="search">Search:</label>
@@ -25,18 +22,21 @@
             </form>
         </div>
         <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item">
+            <table>
+                {% for file in results %}
+                    {% if file[1]!=0 %}
+                    <div>{{ file[0] }}  {{ file[1] }}</div>
+                    {% else %}
+                        {{ pass }}
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+        <div class="grid-item"></div>
     </div> 
     <p>{{ r }}</p>
-    
-    <table>
-        {% for file in results %}
-            {% if file[1]!=0 %}
-            <div>{{ file[0] }}  {{ file[1] }}</div>
-            {% else %}
-                {{ pass }}
-            {% endif %}
-        {% endfor %}
-    </table>
       {% block body %}{% endblock %}
       
 </body>
