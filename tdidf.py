@@ -7,6 +7,9 @@ from tabulate import tabulate
 import wikipedia 
 mypath = "./files"
 
+with open(mypath+"/qualityFiles/stopWords.txt") as f:
+    stopWords = f.read().splitlines()
+
 def init():
     files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     listOfDict=[]
@@ -32,11 +35,12 @@ def count(file):
     for line in content:
         for word in line.split():
             wordClean = ''.join(ch for ch in word if ch not in (string.punctuation+"1234567890-+_\n\t")).lower()
-            if (len(wordClean)>=1):
-                if wordClean in dict:
-                    dict[wordClean] += 1
-                else:
-                    dict[wordClean] = 1
+            if wordClean not in stopWords:
+                if (len(wordClean)>=1):
+                    if wordClean in dict:
+                        dict[wordClean] += 1
+                    else:
+                        dict[wordClean] = 1
     return dict
 
 def tdidf(q,docs,files):
