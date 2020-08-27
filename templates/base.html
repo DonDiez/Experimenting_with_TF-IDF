@@ -1,43 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html id="html" lang="en">
+    <head>
+    <audio id="sound" src="../static/sound/magicSpell.wav" preload="auto"></audio>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='{{ url_for("static", filename="style/main.css")}}'>
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <title>Wizard Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
- 
-    <div class="grid-container">
-        <div class="grid-item"></div>
-        <div class="grid-item">{% block head %}{% endblock %}</div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item">
-            <form method="post">
-                <label for="search">Search:</label>
-                <input type="text" name="searchQuery">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item">
-            <table>
-                {% for file in results %}
-                    {% if file[1]!=0 %}
-                    <div>{{ file[0] }}  {{ file[1] }}</div>
-                    {% else %}
-                        {{ pass }}
-                    {% endif %}
-                {% endfor %}
-            </table>
-        </div>
-        <div class="grid-item"></div>
-    </div> 
-    <p>{{ r }}</p>
-      {% block body %}{% endblock %}
+    {% block body %}{% endblock %} 
       
 </body>
+
+<script>
+    function sound(){
+        document.getElementById('sound').play();
+    }
+</script>
 </html>
