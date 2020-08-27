@@ -10,7 +10,16 @@ Simple, just run it as all other python scripts.
 ```bash
 python3 TF-IDF.py
 ```
- 
+OR 
+
+You can run the search engine page created for this project called _Wizard Search_. The python framework called **Flask** is used to run and host the page.
+
+```bash
+    export FLASK_APP=app.py
+    flask run
+```
+It runs in port :5000
+
 ## Usage
  
 It will ask for the query.
