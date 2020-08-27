@@ -2,7 +2,10 @@
 An easy and simple TF-IDF to see the real "numbers" in action.
 The programs has a folder with dummy data. The files are the wikipedia page with only the text.
 The basic concept used here is the TF-IDF, term frequency and inverted document frequency. [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
- 
+
+
+If you want to download it and run it on a page as an search engine -> **[tartaruz/Wizard Search](https://github.com/tartaruz/Wizard_Search)**
+
 ## Run the program
  
 Simple, just run it as all other python scripts.
